@@ -6,7 +6,6 @@ import { setStack } from '../actions';
 
 class Stacklist extends Component {
     render () {
-        console.log ('stacklist props', this.props)
         return (
             <div>
                 {
