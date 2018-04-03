@@ -2,14 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import stacks from '../data/stacks.json';
 import { Link } from 'react-router-dom';
-import { setStack } from '../actions';
+import { setStack, loadStacks } from '../actions';
 
 class Stacklist extends Component {
+    componentDidMount() {
+        if (this.props.stacks.length === 0) this.props.loadStacks(stacks);
+    }
     render () {
         return (
             <div>
                 {
-                    stacks.map(stack => {
+                    this.props.stacks.map(stack => {
                         return (
                             <Link
                              key={stack.id} 
@@ -26,5 +29,8 @@ class Stacklist extends Component {
         )
     }
 }
+function mapStatesToProps(state) {
+    return { stacks: state.stacks };
+}
 //first parameter of connect function is null because it doesn't listen to the redux store
-export default connect(null, { setStack })(Stacklist);
+export default connect(mapStatesToProps, { setStack, loadStacks })(Stacklist);
