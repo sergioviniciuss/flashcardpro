@@ -29,8 +29,35 @@ class StackForm extends Component {
                     <FormGroup>
                         <ControlLabel>Title</ControlLabel>
                         {' '}
-                        <FormControl />
+                        <FormControl onChange={event => this.setState({title: event.target.value})}/>
                     </FormGroup>
+                    {
+                        this.state.cards.map( (card, index) => {
+                            return (
+                                <div key={card.id}>
+                                    <br />
+                                    <FormGroup>
+                                        <ControlLabel>Prompt:</ControlLabel>
+                                        {' '}
+                                        <FormControl onChange={ event => {
+                                                const { cards } = this.state;
+                                                cards[index].prompt = event.target.value;
+                                                this.setState({ cards });
+                                            }
+                                        } />
+                                        {' '}
+                                        <ControlLabel>Answer:</ControlLabel>
+                                        {' '}
+                                        <FormControl onChange={ event => {
+                                            const { cards } = this.state;
+                                            cards[index].answer = event.target.value;
+                                            this.setState({ cards });
+                                        } }/>
+                                    </FormGroup>
+                                </div>
+                            )
+                        })
+                    }
                 </Form>
                 <br />
                 <Button onClick={() => this.addCard()}>Add a card</Button>
