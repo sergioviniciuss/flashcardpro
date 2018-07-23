@@ -11,7 +11,7 @@ class App extends Component {
                 <Stacklist />
                 <hr />
                 <Link to='/stack_form'>
-                    <h4>Create a new stack </h4>
+                    <h4>Create a new stack</h4>
                 </Link>
             </div>
         )
